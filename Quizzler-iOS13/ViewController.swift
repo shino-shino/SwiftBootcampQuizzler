@@ -16,10 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var falseButton: UIButton!
     
     let quiz = [
-        "a",
-        "b",
-        "c",
-        "d"
+        ["a", "True"],
+        ["b", "True"],
+        ["c", "False"],
+        ["d", "True"]
     ]
     
     var questionNumber =  0;
@@ -31,13 +31,27 @@ class ViewController: UIViewController {
     }
 
     @IBAction func answerButtonPressd(_ sender: UIButton) {
-        questionNumber += 1
+        
+        let useAnswer = sender.currentTitle
+        let actuaAanswer = quiz[questionNumber][1]
+        
+        if useAnswer == actuaAanswer {
+            print("Correct")
+        } else {
+            print("Wrong")
+        }
+        
+        if questionNumber < quiz.count - 1 {
+            questionNumber += 1
+        } else {
+            questionNumber = 0
+        }
+        
         updateUI()
     }
     
     func updateUI() {
-//        FIXME: out of range
-        questionLabel.text = quiz[questionNumber]
+        questionLabel.text = quiz[questionNumber][0]
     }
     
 }
